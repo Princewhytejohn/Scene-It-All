@@ -9,9 +9,22 @@ on:
     types: [created]
 
 jobs:
+  activate:
+    name: Activate Unity Personal License
+    runs-on: ubuntu-latest
+    steps:
+      - name: Activate Unity
+        uses: game-ci/unity-activate@v4
+        with:
+          unityVersion: 6000.0.22f1
+        env:
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+
   test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
+    needs: activate
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -23,7 +36,6 @@ jobs:
           unityVersion: 6000.0.22f1
           githubToken: ${{ secrets.GITHUB_TOKEN }}
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
 
@@ -43,10 +55,8 @@ jobs:
           projectPath: .
           androidExportType: androidPackage
         env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-          UNITY_SERIAL: ''
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
           ANDROID_KEYSTORE_PASS: ${{ secrets.ANDROID_KEYSTORE_PASS }}
           ANDROID_KEYALIAS_NAME: ${{ secrets.ANDROID_KEYALIAS_NAME }}
@@ -55,6 +65,6 @@ jobs:
       - name: Upload APK to GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          files: build/Android/*.apk
+          files: build/android/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
