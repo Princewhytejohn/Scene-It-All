@@ -4,7 +4,7 @@ Scene-It-All
 
 A Unity-based Android TV application that allows users to explore movies using data from The Movie Database (TMDb) API. The app includes search functionality, movie details view, trending/popular movie listings, robust error handling, and CI/CD integration.
 
-Link to apk: 
+Link to apk: https://drive.google.com/file/d/10LNhOqDb2BoaDzSZ4hzEAFXoN7oBAwP0/view?usp=sharing
 
 Setup Instructions
 ------------------
