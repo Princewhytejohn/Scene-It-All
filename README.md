@@ -55,6 +55,8 @@ Known Issues / Limitations
 - **License Activation Failures**: If Unity license is invalid or incorrect, CI build will fail.
 - **No Offline Mode**: App does not cache data between sessions yet.
 - **Unit Tests Coverage**: Limited to API key logic and basic UI manager behavior.
+- Responsivity: Clumsy and doesn't scale well across all device.
+- Live search feature issue: Hitting the back button causes the input field to clear and consquently the search results to dissapear because search request are run each input field value change.
 
 Possible Improvements
 ---------------------
@@ -63,3 +65,9 @@ Possible Improvements
 - Improve unit test coverage for all controllers.
 - Add pagination preloading in search results.
 - Support offline access for previously viewed content.
+
+Implmentations
+--------------
+
+- Lazy loading / Infinite scroll: Loads more elements as you scroll to the last item on the list
+- Live search: Results are fetched and displayed as you type key by key and not until you hit the search button
